@@ -1,3 +1,118 @@
+
+
+## TaxSaver
+
+## Overview
+
+This is the code for [this](https://youtu.be/on623d5EfPw) video on Youtube by Siraj Raval titled "Watch ChatGPT Build a Finance Startup". Use this code as as a template to build your AI startup. This is just using test data, it's not using any real data yet. Any questions? Join our discord to help each other out, find co-founders, and build your own versions of this! 
+
+<img src="https://i.ibb.co/4gKHCQD/Screen-Shot-2022-12-29-at-2-52-19-PM.png" width=50% height=50%>
+
+# Dependencies
+
+- [Flutter](https://docs.flutter.dev/)
+- [VS Code](https://code.visualstudio.com/)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- *Optional* [GitHub CoPilot](https://github.com/features/copilot) 
+
+## Setup & Installation
+-------------------------------------------------
+
+#### Step 1: Install Flutter
+
+Flutter is an open source framework by Google for building natively compiled, multi-platform applications from a single codebase. That could be iOS, Android, Web, MacOS, Linux, & more. In this example, we're just going to focus on mobile platforms (iOS & Android) Flutter uses a language called Dart, which compiles down to native Swift and Java, for iOS and Android respectively. The best way to learn Flutter is to complete steps 1-3 of the official Flutter beginner tutorial. You'll need dependencies for each platform you'd like to push to, so in our case that means Xcode & Android Studio.
+
+[Install  Link ](https://docs.flutter.dev/get-started/install)
+
+#### Step 2: Download & run this code
+
+Download the code with the following command in a command-line interface on your operating system of choice:
+
+`` 
+git clone https://github.com/llSourcell/TaxSaver
+`` 
+
+then enter the examples repository:
+
+`` 
+cd TaxSaver/examples
+``
+
+and install all dependencies from the pubspec.yaml file with the following command:
+
+`` 
+flutter pub get
+``
+
+*and add your test user/pass to the users.dart file!*
+
+Lastly, run the app with this command:
+
+`` 
+flutter run
+``
+
+Now you can customize the UI to your particular needs (or not!)
+
+#### Step 3: Add Plaid to get transaction history
+
+[Plaid](https://plaid.com/) provides developers with tools to connect users  financial institutions to apps they love. Go to Plaid.com and signup to get an API key. Then integrate it with [this](https://github.com/jorgefspereira/plaid_flutter) plugin titled plaid-flutter. You'll need to generate a link token. I just curl'd it from command line and pasted it into the app to get Plaid's Link View to show up.
+
+Find detailed instructions [here](https://dashboard.plaid.com/overview/sandbox)
+
+Plaid example code to start Plaid Login
+
+```Dart
+
+ final configuration = LinkTokenConfiguration(
+                    token: 'link-sandbox-YOURCODE');
+                await PlaidLink.open(configuration: configuration);
+```
+
+#### Step 4: Integrate GPT-3 to interpret financial data for tax savings
+
+Once plaid is connected, it's time to use GPT-3 to read transaction history. The Completion API is one way of analyzing the data, using the entire transaction history as a prompt, then asking it categorize transactions and tell us which ones are likely tax deductible. Signup for [OpenAI](https://openai.com/) API, then install the flutter plugin titled [openai_gpt3_api](https://pub.dev/packages/openai_gpt3_api)
+
+Flutter example using openai_gpt3_api
+```Dart
+
+ Future<String> gptCall() async {
+    var api = GPT3('<YOUR KEY>');
+    var result = await api.completion("What are top spending categories that usually get tax refunds?");
+        'What are top spending categories that usually get tax refunds?');
+    print(result);
+    var choices = result.choices;
+    print(choices[0].text);
+    print(result.toJson());
+    return choices[0].text;
+  }
+```
+
+#### Step 5: Integrate Firebase 
+
+Firebase is a user database by Google that is pretty much GCP but for mobile. It's got everything you need so that you don't have to build and maintain your own web server for webhooks and API requests for iOS or Android. It works especially well with Flutter. [Signup](https://firebase.google.com/) for it and get an API key. Create a project and follow the instructions to integrate this app with firebase. The goal here is to instead of logging into a local textfile, login to the Firebase server.
+
+Example Firebase Flutter code
+```Dart
+FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
+```
+
+# Future Directions
+- Generate 1099, and other tax reports
+- Better UI
+
+# Credits
+
+This was built on a fork on flutter-login by [Nearhuscarl](https://github.com/NearHuscarl/flutter_login). See below. 
+
 # Flutter Login
 [![pub package](https://img.shields.io/pub/v/flutter_login?include_prereleases)](https://pub.dartlang.org/packages/flutter_login)
 [![Join the chat](https://img.shields.io/discord/817442412313051220)](https://discord.gg/kP7jXHeNtS)
