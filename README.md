@@ -4,7 +4,7 @@
 
 ## Overview
 
-This is the code for [this](https://youtu.be/on623d5EfPw) video on Youtube by Siraj Raval titled "Watch ChatGPT Build a Finance Startup". Use this code as as a template to build your AI startup. This is just using test data, it's not using any real data yet. Any questions? Join our discord to help each other out, find co-founders, and build your own versions of this! 
+This is the code for [this](https://youtu.be/on623d5EfPw) video on Youtube by Siraj Raval titled "Watch ChatGPT Build a Finance Startup". Use this code as as a template to build your AI startup. This is just using test data, it's not using any real data yet. Any questions? Join our [discord](https://discord.com/invite/zgEJxeYA2X) to help each other out, find co-founders, and build your own versions of this! 
 
 <img src="https://i.ibb.co/4gKHCQD/Screen-Shot-2022-12-29-at-2-52-19-PM.png" width=50% height=50%>
 
